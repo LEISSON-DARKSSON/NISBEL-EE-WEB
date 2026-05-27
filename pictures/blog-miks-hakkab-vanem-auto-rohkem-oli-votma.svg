@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'>
+  <defs>
+    <linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#0A6CF5'/>
+      <stop offset='100%' stop-color='#0AD4F5'/>
+    </linearGradient>
+  </defs>
+  <rect width='1200' height='630' fill='url(#grad)'/>
+  <rect x='40' y='40' width='1120' height='550' rx='40' fill='rgba(0,0,0,0.35)'/>
+  <text x='600' y='300' font-family='Segoe UI, Arial, sans-serif' font-size='48' fill='white' font-weight='600' text-anchor='middle'>Miks hakkab vanem auto rohkem õli võtma ja kuidas seda lahendada?</text>
+  <text x='600' y='380' font-family='Segoe UI, Arial, sans-serif' font-size='28' fill='rgba(255,255,255,0.85)' text-anchor='middle'>nisbel.ee / blog-miks-hakkab-vanem-auto-rohkem-oli-votma</text>
+</svg>
