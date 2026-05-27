@@ -58,15 +58,15 @@
     "telephone": "+37256846555",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Pärnu mnt 393",
+      "streetAddress": "Liivametsa tn 6-3",
       "addressLocality": "Tallinn",
-      "postalCode": "10917",
+      "postalCode": "11216",
       "addressCountry": "EE"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "59.388",
-      "longitude": "24.675"
+      "latitude": "59.3731243",
+      "longitude": "24.6446924"
     },
     "openingHoursSpecification": [{
       "@type": "OpeningHoursSpecification",
@@ -180,6 +180,41 @@
       --gmpx-rating-color: #ffb300;
       --gmpx-rating-color-empty: #e0e0e0;
     }
+
+    #location-map {
+      max-width: none !important;
+      width: 100% !important;
+      padding: 72px 0 !important;
+      background: #030509 !important;
+    }
+
+    #location-map > div {
+      max-width: none !important;
+      width: 100% !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: #030509 !important;
+      box-shadow: none !important;
+    }
+
+    #location-map iframe {
+      width: 100% !important;
+      height: min(70vh, 680px) !important;
+      min-height: 420px !important;
+      border: 0 !important;
+      filter: invert(0.92) hue-rotate(180deg) saturate(0.8) contrast(0.95);
+    }
+
+    @media (max-width: 640px) {
+      #location-map {
+        padding: 48px 0 !important;
+      }
+
+      #location-map iframe {
+        height: 520px !important;
+        min-height: 520px !important;
+      }
+    }
   </style>
   <script type="module" crossorigin src="./assets/index-8f1a9bbc.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/vendor-fe05aed2.js">
@@ -191,6 +226,7 @@
 <body>
   <div id="root"></div>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/@googlemaps/extended-component-library/0.6.11/index.min.js"></script>
+  <script src="./assets/nisbel-map-address-override.js" defer></script>
   
 </body>
 </html>
