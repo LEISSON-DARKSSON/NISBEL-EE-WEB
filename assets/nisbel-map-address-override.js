@@ -23,6 +23,10 @@
   }
 
   function replaceTextNodes(root) {
+    if (!root) {
+      return;
+    }
+
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     var node;
     while ((node = walker.nextNode())) {
@@ -31,6 +35,24 @@
         node.nodeValue = next;
       }
     }
+  }
+
+  function replaceAttributes(root) {
+    var attributes = ["aria-label", "title", "alt", "href", "src"];
+
+    root.querySelectorAll("[aria-label], [title], [alt], [href], [src]").forEach(function (el) {
+      attributes.forEach(function (attr) {
+        var value = el.getAttribute(attr);
+        if (!value) {
+          return;
+        }
+
+        var next = replaceTextValue(value);
+        if (next !== value) {
+          el.setAttribute(attr, next);
+        }
+      });
+    });
   }
 
   function updateMapLinks(root) {
@@ -79,6 +101,7 @@
 
   function applyOverrides() {
     replaceTextNodes(document.body);
+    replaceAttributes(document);
     updateMapLinks(document);
     updateMapFrame(document);
   }
