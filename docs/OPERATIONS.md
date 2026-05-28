@@ -57,6 +57,19 @@ The check protects the current static snapshot invariants for PR 1 SEO/trust hyg
 
 This does not replace rendered-browser verification, FTPS post-deploy checks, manual review of new claims or copy, or the approval gates for commit, push, and deploy.
 
+## Documentation-Only Closeout Verification
+
+For a documentation-only closeout claim, run the verifier with an explicit range or file list:
+
+```powershell
+npm run verify:doc-only-closeout -- --base origin/main --head HEAD
+npm run verify:doc-only-closeout -- --files docs/OPERATIONS.md
+```
+
+The script allows only `docs/**/*.md` by default and writes `output/doc-only-closeout.json`. It fails if public served files, compiled bundles, deploy workflow logic, or package/dependency files are included in the checked change set.
+
+The PR that introduced this verifier was a governance tooling change, not a documentation-only PR, because it added the verifier script, `package.json`, `.gitignore`, and this operations note. Future documentation-only closeout checks should continue to fail package or dependency file changes by default.
+
 ## JavaScript Or CSS Change
 
 The current repo contains compiled bundles, not source.
