@@ -37,6 +37,26 @@ After edits, verify:
 - JSON-LD validity
 - sitemap URLs and `lastmod`
 
+## Static Snapshot Verification
+
+Run before committing static or runtime changes:
+
+```powershell
+node scripts/verify-static-snapshot.mjs
+```
+
+For syntax-only validation of the verifier:
+
+```powershell
+node --check scripts/verify-static-snapshot.mjs
+```
+
+The same verifier runs in GitHub Actions through `.github/workflows/verify-static-snapshot.yml` on `push` and `pull_request`. The workflow is CI-only: it does not deploy, does not use secrets, does not install dependencies, and only requires repository read access.
+
+The check protects the current static snapshot invariants for PR 1 SEO/trust hygiene, PR 2 mobile conversion actions, and PR 3 trust content blocks. It checks for required runtime script references, canonical sitemap shape, stale title/address regressions, unsupported rating markup, and review schema objects.
+
+This does not replace rendered-browser verification, FTPS post-deploy checks, manual review of new claims or copy, or the approval gates for commit, push, and deploy.
+
 ## JavaScript Or CSS Change
 
 The current repo contains compiled bundles, not source.
