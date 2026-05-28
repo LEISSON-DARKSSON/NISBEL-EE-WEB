@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "classify:change-scope": "node scripts/classify-change-scope.mjs",
     "verify:doc-only-closeout": "node scripts/verify-doc-only-closeout.mjs"
   }
 }
