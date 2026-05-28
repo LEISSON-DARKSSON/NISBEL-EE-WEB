@@ -27,7 +27,22 @@ At the time of assessment, `index.html` references this active compiled set:
 - `assets/email-8e28982d.js`
 - `assets/index-d1f664ce.css`
 
+`index.html` also references these active standalone runtime scripts:
+
+- `assets/nisbel-map-address-override.js`
+- `assets/nisbel-seo-trust-override.js`
+- `assets/nisbel-mobile-conversion.js`
+- `assets/nisbel-trust-content-blocks.js`
+
 The `assets/` folder also contains many older hashed `.js`, `.css`, and `.map` files. Treat them as historical build artifacts until usage is proven.
+
+## Post-Deploy Notes
+
+- PR 1 SEO/trust hygiene is deployed and live checked.
+- PR 2 mobile conversion actions are deployed and live checked.
+- PR 3 trust content blocks are deployed and live checked.
+- `sitemap.xml` is canonical-only for `https://nisbel.ee/` and uses `2026-05-28` as the current `lastmod`.
+- The repo remains a static live-site snapshot; compiled bundles remain off-limits for routine edits.
 
 ## Technology Signals
 
@@ -49,7 +64,7 @@ Larger UI, behavior, routing, dependency, or component changes should start with
 
 ## Known Caveats
 
-- `sitemap.xml` contains old `lastmod` values.
+- `sitemap.xml` should stay minimal and only use `lastmod` when the date reflects a significant verified page update.
 - Open Graph image paths in `index.html` should be checked against actual public files before SEO work.
 - The server-path mirror under `www/apache/domains/www.nisbel.ee/htdocs/dist/` contains a separate small `Web Creator` build artifact and should not be assumed to be the active website.
 - Source maps include `sourcesContent` for at least some bundles, which may help reconstruct source files.
