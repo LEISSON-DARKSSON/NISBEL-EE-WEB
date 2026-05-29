@@ -136,7 +136,56 @@
   }
 
   function buildTrust() {
-    return null;
+    var photos = [
+      { src: "./asutaja-sander-nisu.webp", alt: "Sander Nisu - Nisbel Autostuudio meister", caption: "Sander Nisu - meister" },
+      { src: "./autohooldus-tallinnas-premium.webp", alt: "Nisbel Autostuudio töökoda Tallinnas", caption: "Töökoda" },
+      { src: "./mb-mootori-taastamine.webp", alt: "Mootori taastamine", caption: "Mootori taastamine - dokumenteeritud juhtum" },
+      { src: "./certificates.webp", alt: "Sertifikaadid", caption: "Sertifikaadid" }
+    ];
+
+    var section = document.createElement("section");
+    section.id = TRUST_ID;
+    section.className = "nisbel-conversion-trust";
+
+    var inner = document.createElement("div");
+    inner.className = "nisbel-conversion-trust__inner";
+
+    var title = document.createElement("h2");
+    title.className = "nisbel-conversion-trust__title";
+    title.textContent = "Päris töökoda. Päris meister. Päris tööd.";
+    inner.appendChild(title);
+
+    var grid = document.createElement("div");
+    grid.className = "nisbel-conversion-trust__grid";
+
+    for (var i = 0; i < photos.length; i += 1) {
+      var item = document.createElement("figure");
+      item.className = "nisbel-conversion-trust__item";
+
+      var img = document.createElement("img");
+      img.className = "nisbel-conversion-trust__img";
+      img.src = photos[i].src;
+      img.alt = photos[i].alt;
+      img.loading = "lazy";
+      img.decoding = "async";
+      item.appendChild(img);
+
+      var cap = document.createElement("figcaption");
+      cap.className = "nisbel-conversion-trust__caption";
+      cap.textContent = photos[i].caption;
+      item.appendChild(cap);
+
+      grid.appendChild(item);
+    }
+    inner.appendChild(grid);
+
+    var line = document.createElement("p");
+    line.className = "nisbel-conversion-trust__line";
+    line.textContent = "Iga töö dokumenteerime. Sa näed, mida tegime, mida leidsime, mille vahetasime.";
+    inner.appendChild(line);
+
+    section.appendChild(inner);
+    return section;
   }
 
   function injectStyles() {
@@ -172,6 +221,7 @@
     if (
       !document.getElementById(HERO_ID) ||
       !document.getElementById(SERVICES_ID) ||
+      !document.getElementById(TRUST_ID) ||
       !document.getElementById(STYLE_ID)
     ) {
       ensureAll();
