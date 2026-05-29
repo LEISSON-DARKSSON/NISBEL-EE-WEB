@@ -345,4 +345,11 @@ for (const term of conversionForbidden) {
   assertCheck(!conversionScript.includes(term), "conversion hero/services", `no '${term}'`);
 }
 
+const faqPage = flattenedJsonLd.find((item) => hasType(item, "FAQPage"));
+assertCheck(Boolean(faqPage), "FAQ schema", "FAQPage present");
+const faqJson = JSON.stringify(faqPage || {});
+assertCheck(!faqJson.includes("12 kuu garantii"), "FAQ schema", "no 12 kuu garantii claim");
+assertCheck(!faqJson.includes("1 tund 45"), "FAQ schema", "no 1 tund 45 claim");
+assertCheck(faqJson.includes("Liivametsa"), "FAQ schema", "at least one Q references Liivametsa");
+
 printSummary();
