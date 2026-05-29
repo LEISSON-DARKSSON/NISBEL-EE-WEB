@@ -87,7 +87,52 @@
   }
 
   function buildServices() {
-    return null;
+    var services = [
+      { symptom: "Mootorituli põleb", action: "Diagnostika: süsteemne veaotsing OBD + tootjapõhise tarkvaraga" },
+      { symptom: "Auto ei käivitu", action: "Käivitusprobleemid: starter, aku, kütusepump, immobiliser" },
+      { symptom: "Mootor väriseb või kaotab jõudu", action: "Mootori töö probleemid: süüde, kompressioon, ventilatsioon" },
+      { symptom: "Käigukast käitub imelikult", action: "Käigukasti veaotsing: vedelik, ülekanne, juhtplokk" },
+      { symptom: "Elektriviga", action: "Autoelektri diagnostika: andurid, juhtmestik, juhtplokid" },
+      { symptom: "Ülevaatus ei läbi", action: "Ülevaatuseelne kontroll: probleemide tuvastus enne ametlikku ülevaatust" }
+    ];
+
+    var section = document.createElement("section");
+    section.id = SERVICES_ID;
+    section.className = "nisbel-conversion-services";
+
+    var inner = document.createElement("div");
+    inner.className = "nisbel-conversion-services__inner";
+
+    var title = document.createElement("h2");
+    title.className = "nisbel-conversion-services__title";
+    title.textContent = "Mida tihti lahendame";
+    inner.appendChild(title);
+
+    var grid = document.createElement("div");
+    grid.className = "nisbel-conversion-services__grid";
+
+    for (var i = 0; i < services.length; i += 1) {
+      var article = document.createElement("article");
+      article.className = "nisbel-conversion-service";
+      var h3 = document.createElement("h3");
+      h3.className = "nisbel-conversion-service__symptom";
+      h3.textContent = services[i].symptom;
+      var p = document.createElement("p");
+      p.className = "nisbel-conversion-service__action";
+      p.textContent = services[i].action;
+      article.appendChild(h3);
+      article.appendChild(p);
+      grid.appendChild(article);
+    }
+    inner.appendChild(grid);
+
+    var footer = document.createElement("p");
+    footer.className = "nisbel-conversion-services__footer";
+    footer.textContent = "Tavaline hooldus — õlivahetus, filtrid, vedelikud — käib paralleelselt.";
+    inner.appendChild(footer);
+
+    section.appendChild(inner);
+    return section;
   }
 
   function buildTrust() {
@@ -126,6 +171,7 @@
   var observer = new MutationObserver(function () {
     if (
       !document.getElementById(HERO_ID) ||
+      !document.getElementById(SERVICES_ID) ||
       !document.getElementById(STYLE_ID)
     ) {
       ensureAll();
