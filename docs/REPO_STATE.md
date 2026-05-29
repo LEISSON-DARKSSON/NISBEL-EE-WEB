@@ -33,6 +33,7 @@ At the time of assessment, `index.html` references this active compiled set:
 - `assets/nisbel-seo-trust-override.js`
 - `assets/nisbel-mobile-conversion.js`
 - `assets/nisbel-trust-content-blocks.js`
+- `assets/nisbel-conversion-hero-services.js` — inserts the hero, problem-shaped services grid (6 cards), and photo-backed trust band into `document.body` before `#root`. Idempotent with a `MutationObserver` guard for React rehydration.
 
 The `assets/` folder also contains many older hashed `.js`, `.css`, and `.map` files. Treat them as historical build artifacts until usage is proven.
 

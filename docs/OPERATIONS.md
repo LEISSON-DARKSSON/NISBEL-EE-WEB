@@ -83,6 +83,17 @@ For behavior changes:
 3. Prefer reconstructing source before changing minified code.
 4. Do not edit many hashed bundles blindly.
 
+## Conversion Hero / Services / Trust Band
+
+`assets/nisbel-conversion-hero-services.js` renders the hero, problem-shaped services grid, and photo-backed trust band above the React `#root`. Verifier enforces:
+
+- exactly 6 source occurrences of the service article tag
+- presence of the literal `tel:+37256846555` and the human-readable phone label
+- absence of the unverifiable warranty claim, the unverifiable average-time claim, brand-specialization claims, and the rating-related JSON-LD properties already forbidden by the existing verifier groups
+- absence of the warranty and average-time claims anywhere inside the FAQ JSON-LD block
+
+If a verifier-listed trust claim is later confirmed true by the owner, add it back to a JSON-LD block in `index.html` AND update the verifier's forbidden list in `scripts/verify-static-snapshot.mjs` to remove the corresponding string.
+
 ## Asset Cleanup
 
 Do not remove old hashed bundles just because they are not referenced directly in `index.html`.
