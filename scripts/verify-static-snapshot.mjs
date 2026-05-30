@@ -197,7 +197,13 @@ const publicFiles = [
   "assets/nisbel-seo-trust-override.js",
   "assets/nisbel-mobile-conversion.js",
   "assets/nisbel-trust-content-blocks.js",
-  "assets/nisbel-conversion-hero-services.js"
+  "assets/nisbel-conversion-hero-services.js",
+  "assets/landing.css",
+  "autodiagnostika-tallinn/index.html",
+  "autoelekter-tallinn/index.html",
+  "mootorituli-poleb/index.html",
+  "auto-ei-kaivitu/index.html",
+  "ulevaatuseelne-kontroll/index.html"
 ];
 
 const strictPublicForbiddenTerms = [
@@ -258,7 +264,12 @@ assertCheck(
 
 assertCheck(xmlLooksWellFormed(sitemapXml), "sitemap", "XML looks well formed");
 assertCheck(sitemapXml.includes("<loc>https://nisbel.ee/</loc>"), "sitemap", "canonical loc present");
-assertCheck(sitemapXml.includes("<lastmod>2026-05-28</lastmod>"), "sitemap", "lastmod 2026-05-28 present");
+assertCheck(sitemapXml.includes("<lastmod>2026-05-30</lastmod>"), "sitemap", "lastmod 2026-05-30 present");
+assertCheck(sitemapXml.includes("<loc>https://nisbel.ee/autodiagnostika-tallinn/</loc>"), "sitemap", "autodiagnostika landing loc");
+assertCheck(sitemapXml.includes("<loc>https://nisbel.ee/autoelekter-tallinn/</loc>"), "sitemap", "autoelekter landing loc");
+assertCheck(sitemapXml.includes("<loc>https://nisbel.ee/mootorituli-poleb/</loc>"), "sitemap", "mootorituli landing loc");
+assertCheck(sitemapXml.includes("<loc>https://nisbel.ee/auto-ei-kaivitu/</loc>"), "sitemap", "auto-ei-kaivitu landing loc");
+assertCheck(sitemapXml.includes("<loc>https://nisbel.ee/ulevaatuseelne-kontroll/</loc>"), "sitemap", "ulevaatuseelne landing loc");
 assertCheck(!sitemapXml.includes("#services"), "sitemap", "no #services fragment");
 assertCheck(!sitemapXml.includes("#about"), "sitemap", "no #about fragment");
 assertCheck(!sitemapXml.includes("#contact"), "sitemap", "no #contact fragment");
@@ -351,5 +362,45 @@ const faqJson = JSON.stringify(faqPage || {});
 assertCheck(!faqJson.includes("12 kuu garantii"), "FAQ schema", "no 12 kuu garantii claim");
 assertCheck(!faqJson.includes("1 tund 45"), "FAQ schema", "no 1 tund 45 claim");
 assertCheck(faqJson.includes("Liivametsa"), "FAQ schema", "at least one Q references Liivametsa");
+
+const landingPages = [
+  { file: "autodiagnostika-tallinn/index.html", h1: "Autodiagnostika Tallinnas", canonical: "https://nisbel.ee/autodiagnostika-tallinn/" },
+  { file: "autoelekter-tallinn/index.html", h1: "Autoelektri diagnostika ja remont Tallinnas", canonical: "https://nisbel.ee/autoelekter-tallinn/" },
+  { file: "mootorituli-poleb/index.html", h1: "Mootorituli põleb? Süsteemne veaotsing Nisbelis", canonical: "https://nisbel.ee/mootorituli-poleb/" },
+  { file: "auto-ei-kaivitu/index.html", h1: "Auto ei käivitu? Käivitusprobleemide diagnostika Tallinnas", canonical: "https://nisbel.ee/auto-ei-kaivitu/" },
+  { file: "ulevaatuseelne-kontroll/index.html", h1: "Ülevaatuseelne kontroll Tallinnas", canonical: "https://nisbel.ee/ulevaatuseelne-kontroll/" }
+];
+
+const landingForbidden = [
+  "Pärnu mnt",
+  "Parnu mnt",
+  "Minimalistlik UI",
+  "aggregateRating",
+  "ratingValue",
+  "reviewCount",
+  "12 kuu garantii",
+  "1 tund 45",
+  "Mercedes",
+  "Bosch",
+  "aastat kogemust"
+];
+
+for (const page of landingPages) {
+  const text = readText(page.file);
+  assertCheck(text.includes(page.h1), "landing pages", `${page.file} H1`);
+  assertCheck(text.includes('rel="canonical" href="' + page.canonical + '"'), "landing pages", `${page.file} canonical`);
+  assertCheck(text.includes("tel:+37256846555"), "landing pages", `${page.file} tel link`);
+  assertCheck(text.includes("Liivametsa tn 6-3"), "landing pages", `${page.file} address`);
+  assertCheck(text.includes('"@type": "AutoRepair"'), "landing pages", `${page.file} LocalBusiness JSON-LD`);
+  assertCheck(text.includes('href="../assets/landing.css"'), "landing pages", `${page.file} shared CSS link`);
+  for (const term of landingForbidden) {
+    assertCheck(!text.includes(term), "landing pages", `${page.file} no '${term}'`);
+  }
+}
+
+const landingCss = readText("assets/landing.css");
+assertCheck(landingCss.includes(".landing-shell"), "landing pages", "landing.css shell token");
+assertCheck(landingCss.includes(".landing-hero"), "landing pages", "landing.css hero token");
+assertCheck(landingCss.includes(".landing-footer"), "landing pages", "landing.css footer token");
 
 printSummary();

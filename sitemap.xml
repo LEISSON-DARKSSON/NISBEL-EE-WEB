@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nisbel.ee/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-05-30</lastmod>
+  </url>
+  <url>
+    <loc>https://nisbel.ee/autodiagnostika-tallinn/</loc>
+    <lastmod>2026-05-30</lastmod>
+  </url>
+  <url>
+    <loc>https://nisbel.ee/autoelekter-tallinn/</loc>
+    <lastmod>2026-05-30</lastmod>
+  </url>
+  <url>
+    <loc>https://nisbel.ee/mootorituli-poleb/</loc>
+    <lastmod>2026-05-30</lastmod>
+  </url>
+  <url>
+    <loc>https://nisbel.ee/auto-ei-kaivitu/</loc>
+    <lastmod>2026-05-30</lastmod>
+  </url>
+  <url>
+    <loc>https://nisbel.ee/ulevaatuseelne-kontroll/</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
 </urlset>

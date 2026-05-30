@@ -94,6 +94,25 @@ For behavior changes:
 
 If a verifier-listed trust claim is later confirmed true by the owner, add it back to a JSON-LD block in `index.html` AND update the verifier's forbidden list in `scripts/verify-static-snapshot.mjs` to remove the corresponding string.
 
+## SEO Landing Pages
+
+Five directory-style pages live under their slugs at the repo root. Each is self-contained: own `<title>`, meta description, canonical URL pointing to itself, LocalBusiness + Service JSON-LD, and a link to the shared `assets/landing.css`.
+
+When editing a landing page:
+
+- keep the H1 stable; the verifier enforces an exact-match assertion per page
+- keep `tel:+37256846555`, the literal address, and the canonical URL intact
+- avoid the same forbidden tokens as the rest of the served files (warranty, average-time, brand-specialty, rating-related JSON-LD properties)
+- update the sitemap `lastmod` for the affected URL and the verifier's `lastmod` assertion together when content materially changes
+
+Adding a new landing page requires:
+
+1. New `<slug>/index.html` with the standard head/header/hero/sections/contact/footer pattern.
+2. New entry in `sitemap.xml`.
+3. New entry in `requiredFiles` and `publicFiles` in `scripts/verify-static-snapshot.mjs`.
+4. New row in the verifier's `landingPages` array (file, H1, canonical).
+5. New `<loc>` sitemap assertion.
+
 ## Asset Cleanup
 
 Do not remove old hashed bundles just because they are not referenced directly in `index.html`.
