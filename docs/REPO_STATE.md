@@ -34,8 +34,21 @@ At the time of assessment, `index.html` references this active compiled set:
 - `assets/nisbel-mobile-conversion.js`
 - `assets/nisbel-trust-content-blocks.js`
 - `assets/nisbel-conversion-hero-services.js` — inserts the hero, problem-shaped services grid (6 cards), and photo-backed trust band into `document.body` before `#root`. Idempotent with a `MutationObserver` guard for React rehydration.
+- `assets/landing.css` — shared stylesheet for the SP2 SEO landing pages.
 
 The `assets/` folder also contains many older hashed `.js`, `.css`, and `.map` files. Treat them as historical build artifacts until usage is proven.
+
+## SEO Landing Pages (SP2)
+
+Five standalone directory-style pages, each with its own `index.html`, no React, no override scripts:
+
+- `autodiagnostika-tallinn/index.html`
+- `autoelekter-tallinn/index.html`
+- `mootorituli-poleb/index.html`
+- `auto-ei-kaivitu/index.html`
+- `ulevaatuseelne-kontroll/index.html`
+
+Each is canonical to itself, loads `assets/landing.css`, and ships LocalBusiness + Service JSON-LD. Sitemap registers all five with `lastmod 2026-05-30`.
 
 ## Post-Deploy Notes
 
