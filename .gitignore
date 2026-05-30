@@ -2,3 +2,4 @@
 *.download
 _server_snapshots/
 output/
+.superpowers/

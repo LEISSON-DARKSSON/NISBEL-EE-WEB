@@ -149,7 +149,8 @@ const requiredFiles = [
   "assets/nisbel-map-address-override.js",
   "assets/nisbel-seo-trust-override.js",
   "assets/nisbel-mobile-conversion.js",
-  "assets/nisbel-trust-content-blocks.js"
+  "assets/nisbel-trust-content-blocks.js",
+  "assets/nisbel-conversion-hero-services.js"
 ];
 
 for (const file of requiredFiles) {
@@ -167,7 +168,8 @@ const runtimeScriptRefs = [
   "./assets/nisbel-map-address-override.js",
   "./assets/nisbel-seo-trust-override.js",
   "./assets/nisbel-mobile-conversion.js",
-  "./assets/nisbel-trust-content-blocks.js"
+  "./assets/nisbel-trust-content-blocks.js",
+  "./assets/nisbel-conversion-hero-services.js"
 ];
 
 for (const ref of runtimeScriptRefs) {
@@ -194,7 +196,8 @@ const publicFiles = [
   "assets/nisbel-map-address-override.js",
   "assets/nisbel-seo-trust-override.js",
   "assets/nisbel-mobile-conversion.js",
-  "assets/nisbel-trust-content-blocks.js"
+  "assets/nisbel-trust-content-blocks.js",
+  "assets/nisbel-conversion-hero-services.js"
 ];
 
 const strictPublicForbiddenTerms = [
@@ -314,5 +317,39 @@ assertCheck(countOccurrences(trustScript, '<div class="nisbel-trust-placeholder"
 assertCheck(!trustScript.includes("\"@type\": \"Review\"") && !trustScript.includes("\"@type\":\"Review\""), "trust content", "no Review schema");
 assertCheck(!trustScript.includes("aggregateRating"), "trust content", "no aggregateRating");
 assertCheck(!trustScript.includes("4.9") && !trustScript.includes("150"), "trust content", "no fake rating numbers");
+
+const conversionScript = readText("assets/nisbel-conversion-hero-services.js");
+assertCheck(conversionScript.includes("nisbel-conversion-hero"), "conversion hero/services", "hero id present");
+assertCheck(conversionScript.includes("nisbel-conversion-services"), "conversion hero/services", "services id present");
+assertCheck(conversionScript.includes("nisbel-conversion-trust"), "conversion hero/services", "trust id present");
+assertCheck(conversionScript.includes("tel:+37256846555"), "conversion hero/services", "tel link present");
+assertCheck(conversionScript.includes("+372 5684 6555"), "conversion hero/services", "phone label present");
+assertCheck(
+  countOccurrences(conversionScript, '<article class="nisbel-conversion-service">') === 6,
+  "conversion hero/services",
+  "6 service articles"
+);
+
+const conversionForbidden = [
+  "Pärnu mnt",
+  "Parnu mnt",
+  "aggregateRating",
+  "ratingValue",
+  "12 kuu garantii",
+  "1 tund 45",
+  "Mercedes",
+  "Bosch",
+  "aastat kogemust"
+];
+for (const term of conversionForbidden) {
+  assertCheck(!conversionScript.includes(term), "conversion hero/services", `no '${term}'`);
+}
+
+const faqPage = flattenedJsonLd.find((item) => hasType(item, "FAQPage"));
+assertCheck(Boolean(faqPage), "FAQ schema", "FAQPage present");
+const faqJson = JSON.stringify(faqPage || {});
+assertCheck(!faqJson.includes("12 kuu garantii"), "FAQ schema", "no 12 kuu garantii claim");
+assertCheck(!faqJson.includes("1 tund 45"), "FAQ schema", "no 1 tund 45 claim");
+assertCheck(faqJson.includes("Liivametsa"), "FAQ schema", "at least one Q references Liivametsa");
 
 printSummary();
