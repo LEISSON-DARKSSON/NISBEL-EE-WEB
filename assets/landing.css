@@ -1,0 +1,236 @@
+/* Nisbel landing pages — shared brand chrome
+ * Marker tokens: .landing-shell .landing-hero .landing-section .landing-contact .landing-footer
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0b0d12;
+  color: #f8fafc;
+  line-height: 1.55;
+}
+
+a { color: inherit; }
+
+img { display: block; max-width: 100%; height: auto; }
+
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+  z-index: 10000;
+  background: #facc15;
+  color: #0b0d12;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.landing-shell {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.landing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.landing-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 16px/1 inherit;
+  text-decoration: none;
+  color: #f8fafc;
+}
+.landing-brand img { width: 28px; height: 28px; }
+
+.landing-phone-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #facc15;
+  color: #0b0d12;
+  text-decoration: none;
+  font: 600 14px/1 inherit;
+}
+
+.landing-hero {
+  position: relative;
+  padding: 72px 0 56px;
+  background:
+    linear-gradient(180deg, rgba(3,5,9,0.78) 0%, rgba(3,5,9,0.92) 100%),
+    url("../autohooldus-tallinnas-premium.webp") center/cover no-repeat;
+}
+
+.landing-hero__h1 {
+  margin: 0;
+  font: 700 clamp(30px, 4.5vw, 48px)/1.1 inherit;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.landing-hero__sub {
+  margin: 18px 0 0;
+  max-width: 760px;
+  color: rgba(255,255,255,0.84);
+  font: 400 clamp(16px, 1.55vw, 19px)/1.55 inherit;
+}
+
+.landing-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 28px 0 0;
+}
+
+.landing-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font: 600 16px/1 inherit;
+  text-decoration: none;
+  transition: transform .12s ease;
+}
+.landing-cta:hover { transform: translateY(-1px); }
+.landing-cta--primary { background: #facc15; color: #0b0d12; }
+.landing-cta--secondary {
+  background: rgba(255,255,255,0.08);
+  color: #f8fafc;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.landing-section {
+  padding: 64px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.landing-section__title {
+  margin: 0 0 18px;
+  font: 700 clamp(24px, 2.8vw, 32px)/1.15 inherit;
+  color: #ffffff;
+}
+.landing-section__lede {
+  margin: 0 0 22px;
+  max-width: 760px;
+  color: rgba(255,255,255,0.78);
+}
+
+.landing-list {
+  margin: 0;
+  padding: 0 0 0 1.1em;
+  color: rgba(255,255,255,0.84);
+}
+.landing-list li {
+  margin: 0 0 8px;
+  padding-left: 4px;
+}
+
+.landing-process {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  list-style: none;
+  counter-reset: process;
+}
+.landing-process li {
+  position: relative;
+  padding: 18px 18px 18px 56px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  counter-increment: process;
+}
+.landing-process li::before {
+  content: counter(process);
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #facc15;
+  color: #0b0d12;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 14px/1 inherit;
+}
+.landing-process strong {
+  display: block;
+  color: #ffffff;
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.landing-photo {
+  margin: 36px 0 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.landing-photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.landing-photo figcaption {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.03);
+}
+
+.landing-contact-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.landing-contact-grid > div h3 {
+  margin: 0 0 6px;
+  font: 600 14px/1.2 inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.6);
+}
+.landing-contact-grid > div p {
+  margin: 0;
+  color: rgba(255,255,255,0.92);
+}
+.landing-contact-grid a { text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.36); }
+
+.landing-footer {
+  padding: 28px 0 56px;
+  color: rgba(255,255,255,0.62);
+  font-size: 14px;
+}
+.landing-footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.landing-footer__links a { color: rgba(255,255,255,0.78); text-decoration: none; }
+.landing-footer__links a:hover { color: #facc15; }
+
+@media (max-width: 640px) {
+  .landing-hero { padding: 56px 0 40px; }
+  .landing-section { padding: 48px 0; }
+  .landing-cta { width: 100%; justify-content: center; }
+}
